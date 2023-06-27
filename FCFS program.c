@@ -34,6 +34,6 @@ int main()
         totwt+=wt[i];
         tottat+=tat[i];
     }
-    printf("\nAverage Waiting time:%f",(float)totwt);
-    printf("\n Average turn around time:%f",(float)tottat);
+    printf("\nAverage Waiting time:%f",(float)totwt/n);
+    printf("\n Average turn around time:%f",(float)tottat/n);
     }
