@@ -60,3 +60,34 @@ void consumer()
     mutex=signal(mutex);
 }
 
+//
+1.Producer
+2.Consumer
+3.Exit
+ enter your choice:1
+
+Producer produces the item1
+ enter your choice:1
+
+Producer produces the item2
+ enter your choice:2
+
+Consumer consumes item2
+ enter your choice:2
+
+Consumer consumes item1
+ enter your choice:1
+
+Producer produces the item1
+ enter your choice:1
+
+Producer produces the item2
+ enter your choice:2
+
+Consumer consumes item2
+ enter your choice:2
+
+Consumer consumes item1
+ enter your choice:2
+buffer is empty!!
+
