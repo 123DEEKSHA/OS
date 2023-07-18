@@ -11,15 +11,15 @@ pthread_mutex_t chopstick[NUM_CHOPSTICKS];
 
 int main()
 {
-  // Define counter var i and status_message
+  
   int i, status_message;
   void *msg;
 
-  // Initialise the semaphore array
+  
   for (i = 1; i <= NUM_CHOPSTICKS; i++)
   {
     status_message = pthread_mutex_init(&chopstick[i], NULL);
-    // Check if the mutex is initialised successfully
+    
     if (status_message == -1)
     {
       printf("\n Mutex initialization failed");
@@ -27,7 +27,7 @@ int main()
     }
   }
 
-  // Run the philosopher Threads using *dine() function
+  
   for (i = 1; i <= NUM_PHILOSOPHERS; i++)
   {
     status_message = pthread_create(&philosopher[i], NULL, (void *)dine, (int *)i);
@@ -38,7 +38,7 @@ int main()
     }
   }
 
-  // Wait for all philosophers threads to complete executing (finish dining) before closing the program
+  
   for (i = 1; i <= NUM_PHILOSOPHERS; i++)
   {
     status_message = pthread_join(philosopher[i], &msg);
@@ -49,7 +49,7 @@ int main()
     }
   }
 
-  // Destroy the chopstick Mutex array
+  
   for (i = 1; i <= NUM_CHOPSTICKS; i++)
   {
     status_message = pthread_mutex_destroy(&chopstick[i]);
@@ -65,22 +65,40 @@ void dine(int n)
 {
   printf("\nPhilosopher % d is thinking ", n);
 
-  // Philosopher picks up the left chopstick (wait)
+  
   pthread_mutex_lock(&chopstick[n]);
 
-  // Philosopher picks up the right chopstick (wait)
+  
   pthread_mutex_lock(&chopstick[(n + 1) % NUM_CHOPSTICKS]);
 
-  // After picking up both the chopstick philosopher starts eating
+ 
   printf("\nPhilosopher % d is eating ", n);
   sleep(3);
 
-  // Philosopher places down the left chopstick (signal)
+  
   pthread_mutex_unlock(&chopstick[n]);
 
-  // Philosopher places down the right chopstick (signal)
+ 
   pthread_mutex_unlock(&chopstick[(n + 1) % NUM_CHOPSTICKS]);
 
-  // Philosopher finishes eating
+  
   printf("\nPhilosopher % d Finished eating ", n);
 }
+
+///*ouput
+    Philosopher  1 is thinking 
+    Philosopher  1 is eating 
+    Philosopher  2 is thinking 
+    Philosopher  3 is thinking 
+    Philosopher  5 is thinking 
+    Philosopher  4 is thinking 
+    Philosopher  4 is eating 
+    Philosopher  1 Finished eating 
+    Philosopher  5 is eating 
+    Philosopher  4 Finished eating 
+    Philosopher  3 is eating 
+    Philosopher  5 Finished eating 
+    Philosopher  3 Finished eating 
+    Philosopher  2 is eating 
+    Philosopher  2 Finished eating
+    */
